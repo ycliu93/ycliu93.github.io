@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Multi-Agent Perception </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/main.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../assets/js/hover.zoom.js"></script>
+    <script src="../assets/js/hover.zoom.conf.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+  <!-- +++++ Title Section +++++ -->
+  <div id="white">
+      <div class="container">
+      <div class="row">
+         <center>
+
+        <div class="col-lg-1">
+        </div><!-- /col-lg-8 -->
+
+
+        <div class="col-lg-8 col-lg-offset-1 centered">
+          <span style="font-size:50px">Multi-Agent Perception</span><br><br>
+        </div><!-- /col-lg-8 -->
+
+         </center>
+      </div><!-- /row -->
+
+
+<!--       <div class="row">
+          <center>
+          <div class="col col-lg-2">
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://ycliu93.github.io/">Yen-Cheng Liu</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://www.linkedin.com/in/junjiao-tian-42b9758a/">Junjiao Tian*</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://sites.google.com/view/nathanglaser/">Nathaniel Glaser*</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://www.cc.gatech.edu/~zk15/">Zsolt Kira</a></span>
+          </div>
+
+
+        </center>
+      </div><!-- /row -->
+
+
+
+      <!-- /Conference, Institue -->
+      <div class="row"> 
+        <center>
+          <span style="font-size:22px">Robotics Perception and Learning Lab</span><br>
+          <span style="font-size:22px">Georgia Tech</span><br>
+
+        </center>
+      </div><!-- /row -->
+
+
+      <!-- /Teaser image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/1359-teaser.gif" height="512" width="512">
+          <p> 
+          Figure: Multi-Agent Perception via Communication.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+      <center><hr width="80%" ></center>
+
+      <!-- Motivation -->
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">Motivation</span><br><br>
+
+          <div style="text-align:justify;font-size:25px">
+          <p>
+While significant advances have been made for single-agent perception (i.e., computer vision tasks from a single perspective), single-agent perception suffers from occlusion and sensor degradation. This motivates us to develop a multi-agent perception system, where one agent improves perception accuracy by communicating and sharing information with other agents.
+          </div>
+        </center>
+      </div><!-- /row -->
+
+      <center><hr width="80%" ></center>
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">Challenges</span><br><br>
+
+          <div style="text-align:justify;font-size:25px">
+            <ul>
+              <li><b><p>Bandwidth usage</b>: Each agent is required to transmit encoded visual data (high-dimensional feature maps) to other agents, and high bandwidth usage may result in network congestion and latency issues. Therefore, an efficient multi-agent perception system should be bandwidth-limited.</li>
+              <li><b><p>Tradeoff between bandwidth and accuracy</b>: Transmission bandwidth limitation might decrease the perception accurcay improvement. </li>
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+            <!-- /Teaser image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/high_band.png" height="260" width="300">
+          <p> 
+          Figure: A fully-connected communication network consumes high transmission bandwidth.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+
+
+      <center><hr width="80%" ></center>
+
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">Our Methods</span><br><br>
+
+          <div style="text-align:justify;font-size:22px">
+            <ul>
+              <li><b><p>Learnable 3-way handshake communication</b>: </li>
+                <ul>
+                  <li> <p> Request: The degraded agent sends compressed query to normal agents. </li>
+                  <li> <p> Match:  Normal agents compute and return the matching scores. </li>
+                  <li> <p> Connect: Based on the matching scores, the degraded agent decide <b>who</b> to communicate with. </li>
+                </ul>
+                <p>
+                Therefore, with the assumption of <b>known</b> degraded agent(s), our model learns who to commmunicate with [1]. 
+
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+            <!-- who2com image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/3way.gif" height="250" width="700">
+          <p> 
+          Figure: Learnable 3-way handshaking communication.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+      <div class="row"> 
+        <center>
+          <div style="text-align:justify;font-size:25px">
+                <p>
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+      <div class="row"> 
+        <center>
+          <div style="text-align:justify;font-size:25px">
+                <p>
+                However, an ideal communication mechanism is to switch on transmission when the agent requires information from other agents to improve its perception ability, while it should also switch off the transmission when it has sufficient information for its own perception task.
+
+                Thus, with the assumption of <b>unknown</b> degraded agents, our model applies self-attention to learn <b>when</b> to communicate [2]. 
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+            <!-- who2com image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/when2com.gif" height="330" width="900">
+          <p> 
+          Figure: When2com model.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+      <div class="row"> 
+        <center>
+          <div style="text-align:justify;font-size:25px">
+            <ul>
+              <li><b><p>Reduceing network complexity: </b> As mentioned above, using the fully-connect communication network results in high bandwidth usage. We thus prunes the less important links according to edge weights (i.e., matching scores).  </li>
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+
+            <!-- who2com image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/com_group.png" height="200" width="700">
+          <p> 
+          Figure: Network complexity reduction.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+      <center><hr width="80%" ></center>
+
+
+
+
+      <div class="row"> 
+        <center>
+        <span style="font-size:28px">1-min Video</span><br><br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/r2uqtLumvlM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>        </center>
+      </div><!-- /row -->
+
+      <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">Paper </span><br><br>
+
+          <div class="col-lg-3 col-lg-offset-3">
+             <td><a href="https://arxiv.org/abs/2003.09575"><img class="layered-paper-big" style="height:150px" src="cvpr20_assets/icra_paper_thumb.png"/></a></td>
+          </div>
+
+
+          <div class="col-lg-3 ">
+             <td><a href=""><img class="layered-paper-big" style="height:150px" src="cvpr20_assets/cvpr20_paper_thumb.png"/></a></td>
+          </div>
+        </center>
+
+      </div><!-- /row -->
+            <div class="row"> 
+        <center>
+          
+          <br><br>
+          <div class="col-lg-3 col-lg-offset-3">
+            ICRA'20 
+          </div>
+
+
+          <div class="col-lg-3 ">
+            CVPR'20 (Coming soon)
+          </div>
+        </center>
+      </div><!-- /row -->
+
+      <br>
+      <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">Code </span><br><br>
+
+          <div class="col-lg-2 col-lg-offset-5">
+          <td><a href="https://github.gatech.edu/RIPL/multi-agent-perception"><img class="img-responsive" style="height:100px" src="common_assets/github_icon.png"/></a></td>
+          </div>
+
+
+        </center>
+      </div><!-- /row -->
+      <br>
+      <br>
+      <br>
+      <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">AirSim-MAP Dataset</span><br><br>
+
+          <div class="col-lg-4 col-lg-offset-4">
+          <td><a href="https://gtvault-my.sharepoint.com/personal/yliu3133_gatech_edu/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fyliu3133%5Fgatech%5Fedu%2FDocuments" target="_blank"><img class="img-responsive"  src="cvpr20_assets/airsim_map.png" /></a></td>
+          </div>
+
+        </center>
+      </div><!-- /row -->
+      <br>
+      <br>
+
+
+      <div class="row"> 
+        <center>
+
+          <div class="col-lg-6 col-lg-offset-3">
+          <td><img class="img-responsive"  src="cvpr20_assets/airsim_map.gif" /></td>
+                    <p> 
+          Figure: Visualization of our collected datasets.
+
+          </div>
+
+        </center>
+      </div><!-- /row -->
+      <br>
+      <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">References </span><br><br>
+        </center>
+      </div><!-- /row -->
+
+
+
+      <div class="row"> 
+      <div class="col-lg-10 col-lg-offset-1">
+          <p> 
+  [1] "Who2com:  Collaborative  Perception  via  Learnable  Handshake Communication", Yen-Cheng Liu, Junjiao Tian, Chih-Yao Ma, Nathaniel Glaser, Chia-Wen Kuo, Zsolt Kira, ICRA 2020 <br>
+  [2] "When2com: Multi-Agent Perception via Communication Graph Grouping", Yen-Cheng Liu, Junjiao Tian*,  Nathaniel Glaser*, Zsolt Kira, CVPR 2020 (* equal contribution) <br>
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+      <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+      <center>
+      <span style="font-size:28px">Team Members & Collaborators </span><br><br>
+      </center>
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="../assets/img/user2.png" class="img-responsive" alt="Yen-Cheng" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://ycliu93.github.io/" target="_blank">Yen-Cheng Liu</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/junjiao.png" class="img-responsive" alt="Junjiao" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://www.linkedin.com/in/junjiao-tian-42b9758a" target="_blank">Junjiao Tian</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/nglaser.png" class="img-responsive" alt="Nathan" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://sites.google.com/view/nathanglaser/" target="_blank">Nathan Glaser</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/cma.png" class="img-responsive" alt="Chih-Yao" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://chihyaoma.github.io/" target="_blank">Chih-Yao Ma</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/cwkuo.png" class="img-responsive" alt="Chia-Wen" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://sites.google.com/view/chiawen-kuo/home/" target="_blank">Chia-Wen Kuo</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/zk.png" class="img-responsive" alt="Zsolt" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://www.cc.gatech.edu/~zk15/" target="_blank">Zsolt Kira</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+      </div><!-- /row -->
+
+
+      <div class="row"> 
+
+        <div class="col-lg-3 col-lg-offset-3">
+            <center>
+            <img src="common_assets/ripl.png" class="img-responsive" alt="ripl" >
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-3">
+            <center>
+            <img src="common_assets/gt_logo.png" class="img-responsive" alt="gt" >
+            </center>
+        </div><!-- /col-lg-2 -->
+
+      </div><!-- /row -->
+
+
+      <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">Acknowledgements </span><br><br>
+          This work was supported by ONR grant N00014-18-1-2829.
+        </center>
+      </div><!-- /row -->
+
+
+
+
+      </div> <!-- /container -->
+  </div><!-- /white -->
+
+
+
+
+
+
+
+
+
+	<!-- +++++ Footer Section +++++ -->
+	
+	
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+
+
+<style type="text/css">
+  .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+            15px 15px 0 0px #fff, /* The fourth layer */
+            15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+            20px 20px 0 0px #fff, /* The fifth layer */
+            20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+            25px 25px 0 0px #fff, /* The fifth layer */
+            25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+    margin-left: 10px;
+    margin-right: 45px;
+  }
+
+
+  .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+  }
+
+</style>
+
+
+
+  </body>
+</html>
