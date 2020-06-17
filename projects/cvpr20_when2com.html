@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>When2com: Multi-Agent Perception via Communication Graph Grouping </title>
+    <title>Multi-Agent Perception </title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -35,12 +35,20 @@
       <div class="container">
       <div class="row">
          <center>
-          <span style="font-size:36px">When2com: Multi-Agent Perception via Communication Graph Grouping</span><br><br>
+
+        <div class="col-lg-1">
+        </div><!-- /col-lg-8 -->
+
+
+        <div class="col-lg-8 col-lg-offset-1 centered">
+          <span style="font-size:50px">Multi-Agent Perception</span><br><br>
+        </div><!-- /col-lg-8 -->
+
          </center>
       </div><!-- /row -->
 
 
-      <div class="row">
+<!--       <div class="row">
           <center>
           <div class="col col-lg-2">
           </div>
@@ -65,46 +73,212 @@
         </center>
       </div><!-- /row -->
 
-      <div class="row">
-        <center>
-          <span style="font-size:12px">(* Equal Contribution)</span>
-        </center>
+
+      <div class="row"> 
+
+        <div class="col-lg-2 col-lg-offset-4">
+            <center>
+            <img src="common_assets/ripl.png" class="img-responsive" alt="ripl" >
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2">
+            <center>
+            <img src="common_assets/gt_logo.png" class="img-responsive" alt="gt" >
+            </center>
+        </div><!-- /col-lg-2 -->
+
       </div><!-- /row -->
       <br>
 
-      <!-- /Conference, Institue -->
       <div class="row"> 
-        <center>
-          <span style="font-size:25px">Georgia Tech</span><br>
-          <span style="font-size:22px">CVPR 2020</span>
-        </center>
+
+        <div class="col-lg-2 ">
+            <center>
+                <span style="font-size:16px"><a href="https://ycliu93.github.io/" target="_blank">Yen-Cheng Liu</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+                <span style="font-size:16px"><a href="https://www.linkedin.com/in/junjiao-tian-42b9758a" target="_blank">Junjiao Tian</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+
+        <div class="col-lg-2 ">
+            <center>
+                <span style="font-size:16px"><a href="https://sites.google.com/view/nathanglaser/" target="_blank">Nathan Glaser</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+                <span style="font-size:16px"><a href="https://chihyaoma.github.io/" target="_blank">Chih-Yao Ma</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+                <span style="font-size:16px"><a href="https://sites.google.com/view/chiawen-kuo/home" target="_blank">Chia-Wen Kuo</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+
+        <div class="col-lg-2 ">
+            <center>
+                <span style="font-size:16px"><a href="https://www.cc.gatech.edu/~zk15/" target="_blank">Zsolt Kira</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
       </div><!-- /row -->
+
+
+<!--       <center><hr width="80%" ></center>
+ -->
+
+
 
 
       <!-- /Teaser image -->
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 centered">
-          <img src="cvpr20_assets/1359-teaser.gif" alt="Yen-Cheng" height="512" width="512">
+          <img src="cvpr20_assets/1359-teaser.gif" height="512" width="512">
           <p> 
-          Figure: Multi-Agent Perception via Communication 
+          Figure: Multi-Agent Perception via Communication.
         </div><!-- /col-lg-8 -->
       </div><!-- /row -->
 
       <center><hr width="80%" ></center>
 
-      <!-- Abstract -->
+      <!-- Motivation -->
       <div class="row"> 
         <center>
-          <span style="font-size:28px">Abstract</span><br><br>
+          <span style="font-size:28px">Motivation</span><br><br>
 
           <div style="text-align:justify;font-size:25px">
           <p>
-          While significant advances have been made for single-agent perception, many applications require multiple sensing agents and cross-agent communication due to benefits such as coverage and robustness. It is therefore critical to develop frameworks which support multi-agent collaborative perception in a distributed and bandwidth-efficient manner. In this paper, we address the collaborative perception problem, where one agent is required to perform a perception task and can communicate and share information with other agents on the same task. Specifically, we propose a communication framework by learning both to construct communication groups and decide when to communicate. We demonstrate the generalizability of our framework on two different perception tasks and show that it significantly reduces communication bandwidth while maintaining superior performance. 
+While significant advances have been made for single-agent perception (i.e., computer vision tasks from a single perspective), single-agent perception suffers from occlusion and sensor degradation. This motivates us to develop a multi-agent perception system, where one agent improves perception accuracy by communicating and sharing information with other agents.
           </div>
         </center>
       </div><!-- /row -->
 
       <center><hr width="80%" ></center>
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">Challenges</span><br><br>
+
+          <div style="text-align:justify;font-size:25px">
+            <ul>
+              <li><b><p>Bandwidth usage</b>: Each agent is required to transmit encoded visual data (high-dimensional feature maps) to other agents, and high bandwidth usage may result in network congestion and latency issues. Therefore, an efficient multi-agent perception system should be bandwidth-limited.</li>
+              <li><b><p>Tradeoff between bandwidth and accuracy</b>: Transmission bandwidth limitation might decrease the perception accurcay improvement. </li>
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+            <!-- /Teaser image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/high_band.png" height="260" width="300">
+          <p> 
+          Figure: A fully-connected communication network consumes high transmission bandwidth.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+
+
+      <center><hr width="80%" ></center>
+
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">Our Methods</span><br><br>
+
+          <div style="text-align:justify;font-size:22px">
+            <ul>
+              <li><b><p>Learnable 3-way handshake communication</b>: </li>
+                <ul>
+                  <li> <p> Request: The degraded agent sends compact query to normal agents. </li>
+                  <li> <p> Match:  Normal agents compute and return the matching scores. </li>
+                  <li> <p> Connect: Based on the matching scores, the degraded agent decide <b>who</b> to communicate with. </li>
+                </ul>
+                <p>
+                Therefore, with the assumption of <b>known</b> degraded agent(s), our model learns who to commmunicate with [1]. 
+
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+            <!-- who2com image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/3way.gif" height="250" width="700">
+          <p> 
+          Figure: Learnable 3-way handshaking communication.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+      <div class="row"> 
+        <center>
+          <div style="text-align:justify;font-size:25px">
+                <p>
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+      <div class="row"> 
+        <center>
+          <div style="text-align:justify;font-size:25px">
+                <p>
+                However, an ideal communication mechanism is to switch on transmission when the agent requires information from other agents to improve its perception ability, while it should also switch off the transmission when it has sufficient information for its own perception task.
+
+                Thus, with the assumption of <b>unknown</b> degraded agents, our model applies self-attention to learn <b>when</b> to communicate [2]. 
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+            <!-- who2com image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/when2com.gif" height="330" width="900">
+          <p> 
+          Figure: When2com model.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+      <div class="row"> 
+        <center>
+          <div style="text-align:justify;font-size:25px">
+            <ul>
+              <li><b><p>Reducing network complexity: </b> As mentioned above, using the fully-connect communication network results in high bandwidth usage. We thus prune the less important links according to edge weights (i.e., matching scores).  </li>
+            </ul>  
+          </div>
+        </center>
+      </div><!-- /row -->
+
+
+            <!-- who2com image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img src="cvpr20_assets/com_group.png" height="200" width="700">
+          <p> 
+          Figure: Network complexity reduction.
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+      <center><hr width="80%" ></center>
+
+
 
 
       <div class="row"> 
@@ -116,25 +290,36 @@
       <center><hr width="60%" ></center>
 
 
-
-
-
       <div class="row"> 
         <center>
           <span style="font-size:28px">Paper </span><br><br>
 
           <div class="col-lg-3 col-lg-offset-3">
-             <td><a href=""><img class="layered-paper-big" style="height:150px" src="cvpr20_assets/cvpr20_paper_thumb.png"/></a></td>
+             <td><a href="https://arxiv.org/abs/2003.09575"><img class="layered-paper-big" style="height:150px" src="cvpr20_assets/icra_paper_thumb.png"/></a></td>
           </div>
 
-          <div class="col-lg-2 ">
-          <td><span style="font-size:15pt"><a href=""><br>[Coming Soon]</a></td>
+
+          <div class="col-lg-3 ">
+             <td><a href="http://openaccess.thecvf.com/content_CVPR_2020/papers/Liu_When2com_Multi-Agent_Perception_via_Communication_Graph_Grouping_CVPR_2020_paper.pdf"><img class="layered-paper-big" style="height:150px" src="cvpr20_assets/cvpr20_paper_thumb.png"/></a></td>
+          </div>
+        </center>
+
+      </div><!-- /row -->
+            <div class="row"> 
+        <center>
+          
+          <br><br>
+          <div class="col-lg-3 col-lg-offset-3">
+            ICRA'20 
           </div>
 
+
+          <div class="col-lg-3 ">
+            CVPR'20
+          </div>
         </center>
       </div><!-- /row -->
-      <br>
-      <br>
+
       <br>
       <center><hr width="60%" ></center>
 
@@ -143,20 +328,137 @@
         <center>
           <span style="font-size:28px">Code </span><br><br>
 
-          <div class="col-lg-2 col-lg-offset-4">
-          <td><a href=""><img class="img-responsive" style="height:100px" src="common_assets/github_icon.png"/></a></td>
+          <div class="col-lg-2 col-lg-offset-5">
+          <td><a href="https://github.com/GT-RIPL/MultiAgentPerception"><img class="img-responsive" style="height:100px" src="common_assets/github_icon.png"/></a></td>
+          <br>
           </div>
 
-          <div class="col-lg-2 ">
-          <td><span style="font-size:15pt"><a href=""><br>[Coming Soon]</a></td>
+
+        </center>
+      </div><!-- /row -->
+      <br>
+      <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">AirSim-MAP Dataset</span><br><br>
+        </center>
+
+          <div class="col-lg-10 col-lg-offset-1">
+          Our AirSim-MAP dataset provides <b>RGB</b> images, <b>depth maps</b>, <b>camera poses</b>, and <b>semantic segmentation labels</b> for <b>5-6 agents/views</b>. All images are captured simultaneously. This dataset enables several under-explored multi-agent perception tasks, such as 3D semantic segmentation, depth estimation, pose estimation, etc. Note that our AirSim-CP in ICRA paper has an asynchronous issue between views, so we recommend to use AirSim-MAP for further applications. The major differences between AirSim-MAP and AirSim-CP are trajectories and motions of drones. Feel free to contact @YenCheng for further details. 
           </div>
+      </div><!-- /row -->
+          <br>
+
+      <div class="row"> 
+        <center>
+          <div class="col-lg-4 col-lg-offset-4">
+          <td><a href="https://gtvault-my.sharepoint.com/:f:/g/personal/yliu3133_gatech_edu/Ett0G1_5YYdBpgojk0uWESgBi95dO79LkbYaKRhlBIkVJQ?e=vdjklb" target="_blank"><img class="img-responsive"  src="cvpr20_assets/airsim_map.png" /></a></td>
+        </div>
 
         </center>
       </div><!-- /row -->
       <br>
       <br>
+
+
+      <div class="row"> 
+        <center>
+
+          <div class="col-lg-6 col-lg-offset-3">
+          <td><img class="img-responsive"  src="cvpr20_assets/airsim_map.gif" /></td>
+                    <p> 
+          Figure: Visualization of our collected datasets.
+
+          </div>
+
+        </center>
+      </div><!-- /row -->
       <br>
       <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+        <center>
+          <span style="font-size:28px">References </span><br><br>
+        </center>
+      </div><!-- /row -->
+
+
+
+      <div class="row"> 
+      <div class="col-lg-10 col-lg-offset-1">
+          <p> 
+  [1] "Who2com:  Collaborative  Perception  via  Learnable  Handshake Communication", Yen-Cheng Liu, Junjiao Tian, Chih-Yao Ma, Nathaniel Glaser, Chia-Wen Kuo, Zsolt Kira, ICRA 2020 <br>
+  [2] "When2com: Multi-Agent Perception via Communication Graph Grouping", Yen-Cheng Liu, Junjiao Tian*,  Nathaniel Glaser*, Zsolt Kira, CVPR 2020 (* equal contribution) <br>
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+
+
+      <center><hr width="60%" ></center>
+
+
+      <div class="row"> 
+          <center>
+          <span style="font-size:28px">Team Members & Collaborators </span><br><br>
+        </center>
+
+
+      </div><!-- /row -->
+      <br>
+
+      <div class="row"> 
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="../assets/img/user2.png" class="img-responsive" alt="Yen-Cheng" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://ycliu93.github.io/" target="_blank">Yen-Cheng Liu</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/junjiao.png" class="img-responsive" alt="Junjiao" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://www.linkedin.com/in/junjiao-tian-42b9758a" target="_blank">Junjiao Tian</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/nglaser.png" class="img-responsive" alt="Nathan" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://sites.google.com/view/nathanglaser/" target="_blank">Nathan Glaser</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/cma.png" class="img-responsive" alt="Chih-Yao" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://chihyaoma.github.io/" target="_blank">Chih-Yao Ma</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/cwkuo.png" class="img-responsive" alt="Chia-Wen" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://sites.google.com/view/chiawen-kuo/home" target="_blank">Chia-Wen Kuo</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+
+        <div class="col-lg-2 ">
+            <center>
+            <img src="cvpr20_assets/people/zk.png" class="img-responsive" alt="Zsolt" height="120" width="120"><br>
+                <span style="font-size:16px"><a href="https://www.cc.gatech.edu/~zk15/" target="_blank">Zsolt Kira</a></span>
+            </center>
+        </div><!-- /col-lg-2 -->
+
+      </div><!-- /row -->
+
+      <center><hr width="60%" ></center>
+
 
       <div class="row"> 
         <center>
@@ -165,6 +467,17 @@
         </center>
       </div><!-- /row -->
 
+
+      <div class="row centered">  
+
+      <div class="col-lg-4 col-lg-offset-4 centered">
+        <centered>
+          <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=080808&w=300&t=tt&d=DF87ABNgWo0t4HTDuYcublYxZZ2WQUtVRjOktEThI7Y&co=ffffff&ct=808080&cmo=3acc3a&cmn=ff5353"></script>
+        </centered>
+
+
+      </div>
+     </div>
 
 
 
@@ -181,6 +494,8 @@
 
 	<!-- +++++ Footer Section +++++ -->
 	
+
+
 	
 
     <!-- Bootstrap core JavaScript
