@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Unbiased Teacher for Semi-Supervised Object Detection</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
+
+  <!-- Custom styles for this template -->
+  <link href="../assets/css/main.css" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="../assets/js/hover.zoom.js"></script>
+  <script src="../assets/js/hover.zoom.conf.js"></script>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <!-- +++++ Title Section +++++ -->
+  <div id="white">
+    <div class="container">
+      <div class="row">
+        <center>
+
+          <div class="col-lg-12  centered">
+            <span style="font-size:40px">Unbiased Teacher v2: Semi-supervised Object Detection for Anchor-free and Anchor-based Detectors</span><br><br>
+          </div><!-- /col-lg-8 -->
+
+        </center>
+      </div><!-- /row -->
+
+
+      <!--       <div class="row">
+          <center>
+          <div class="col col-lg-2">
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://ycliu93.github.io/">Yen-Cheng Liu</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://www.linkedin.com/in/junjiao-tian-42b9758a/">Junjiao Tian*</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://sites.google.com/view/nathanglaser/">Nathaniel Glaser*</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://www.cc.gatech.edu/~zk15/">Zsolt Kira</a></span>
+          </div>
+
+
+        </center>
+      </div><!-- /row -->
+
+
+
+      <div class="row">
+
+        <div class="col-lg-4 ">
+          <center>
+            <span style="font-size:16px"><a href="https://ycliu93.github.io/" target="_blank">Yen-Cheng
+                Liu<sup>1,2</sup></a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-4 ">
+          <center>
+            <span style="font-size:16px"><a href="https://chihyaoma.github.io/" target="_blank">Chih-Yao
+                Ma<sup>2</sup></a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-4 ">
+          <center>
+            <span style="font-size:16px"><a href="https://www.cc.gatech.edu/~zk15/" target="_blank">Zsolt
+                Kira<sup>1</sup></a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+      </div><!-- /row -->
+
+
+
+      <br>
+
+
+      <div class="row">
+
+        <div class="col-lg-3 col-lg-offset-3">
+          <center>
+            <span style="font-size:20px"><a href="https://www.gatech.edu/" target="_blank"><sup>1</sup>Georgia
+                Tech</a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-3">
+          <center>
+            <span style="font-size:20px"><a href="https://research.fb.com/" target="_blank"><sup>2</sup>Meta</a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+      </div><!-- /row -->
+
+      <br>
+      <div class="row">
+
+        <div class="col-lg-4 col-lg-offset-4 centered">
+          <center>
+            <span style="font-size:24px">CVPR 2022</span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+
+      </div><!-- /row -->
+
+      <br>
+      <br>
+
+
+      <!--       <center><hr width="80%" ></center>
+ -->
+
+      <!-- /Teaser image -->
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 centered">
+          <img class="img-responsive" src="cvpr22_assets/teaser.png" height="250" width="1000">
+          <p>
+            <b>Right</b>: Anchor-free detectors are rapidly developed recently, while adapting the pseudo-labeling method on the anchor-free models results in less improvements compared with the anchor-based detectors.<br>
+            <b>Left</b>: Illustration of Listen2Student mechanism, which explicitly compares the prediction uncertainties between the Teacher and the Student and selects these instances where the  teacher has lower uncertainty than the student.
+          </p>
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+      <br>
+      <br>
+
+      <br>
+
+      <!-- Motivation -->
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Motivation</span>
+          <center>
+            <hr width="95%">
+          </center>
+    
+          <div style="text-align:justify;font-size:25px">
+            <p>
+              Semi-supervised Object Detection aims to leverage unlabeled images to improve the supervised object detector.
+
+              Despite the rapid development and significant improvement, there are still two remaining issues that are left untackled:  <br>
+              (1) <b>There is no prior SS-OD work on anchor-free detectors</b> <br>
+              (2) <b>Prior works are ineffective in pseudo-labeling on the bounding box regression</b>.
+
+          </div>
+        </center>
+      </div><!-- /row -->
+      <br><br>
+
+      <!-- Findings -->
+
+
+
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Findings</span>
+          <center>
+            <hr width="95%">
+          </center>
+    
+          <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 centered">
+              <img class="img-responsive" src="cvpr22_assets/center_bias.png" height="250" width="800">
+              <p>
+              </p>
+            </div><!-- /col-lg-8 -->
+          </div><!-- /row -->
+    
+          <div style="text-align:justify;font-size:25px">
+            <p>
+              llustration of Centerness bias issue. <b>Left:</b> Selecting pseudo-boxes based on box scores leads to worse results in semi-supervised learning compared with selecting based on classification scores.  <b>Center:</b> Box scores of the anchor-free detectors are defined as the multiplication of the centerness scores and the classification scores, and we find that <b>Right:</b> box scores of pseudo-boxes is dominated by the centerness scores, which are unreliable in semi-supervised setting.
+          </div>
+
+
+          <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 centered">
+              <img class="img-responsive" src="cvpr22_assets/label_assignment.png" height="250" width="800">
+              <p>
+              </p>
+            </div><!-- /col-lg-8 -->
+          </div><!-- /row -->
+    
+          <div style="text-align:justify;font-size:25px">
+            <p>
+              llustration of Unreliable label assignments. <b>Left:</b> Existing techniques for improving fully-supervised anchor-free detectors such as Center Sampling and localization-based classification labels are less robust to the localization noise (e.g., box center shifted) in pseudo-boxes, and the pixel-wise recall and precision of these two techniques are lower than the standard label assignment.
+              Thus, our empirical evaluation shows that the standard label assignment leads to a better result (as shown in the <b>Right</b> figure).          </div>
+
+
+        </center>
+      </div><!-- /row -->
+
+      <br><br>
+
+      <!-- Listen2Student -->
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Listen2Student</span>
+          <center>
+            <hr width="80%">
+          </center>
+    
+          <!-- /Method image -->
+          <div class="col-lg-10 col-lg-offset-1 centered">
+            <img class="img-responsive" src="cvpr22_assets/listen2student.png">
+            <p>
+              Figure: Illustration of our <b>Listen2Student</b>.
+          </div><!-- /col-lg-8 -->
+        </center>
+      </div><!-- /row -->
+
+      <div class="row">
+        <center>
+          <div style="text-align:justify;font-size:25px">
+            <p>
+            (<b>Left</b>) We categorize the regression pseudo-labels into beneficial and misleading instances, and (<b>Right</b>) our Listen2Student prevents the misleading regression pseudo-labels and thus improves the regression branch
+
+
+
+
+              <!-- To overcome the above issues, we propose a general framework – <b>Unbiased Teacher</b>: an approach
+              that jointly trains a Student and a slowly progressing Teacher in a mutually-beneficial manner, in
+              which the Teacher generates pseudo-labels to train the Student, and the Student gradually updates
+              theTeacher via Exponential Moving Average (EMA), while the Teacher and Student are given
+              different augmented input images (see the above Figure).  -->
+              
+              To understand more details about our method, we
+              encourage the readers to take a closer look at <a href="https://openreview.net/pdf?id=MJIve1zgR_"
+                target="_blank">our paper</a>.
+          </div>
+        </center>
+      </div><!-- /row -->
+
+        
+
+      <!-- <div class="row">
+        <center>
+          <span style="font-size:28px">1-min Video</span><br><br>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/r2uqtLumvlM" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </center>
+      </div> -->
+
+      <br><br>
+
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Paper </span>
+        </center>
+        <center>
+          <hr width="60%">
+        </center>
+    
+      </div><!-- /row -->
+      <br><br>
+
+      
+      <div class="row vertical-align">
+        <div class="col-lg-1 col-lg-offset-2">
+          <td><a href="https://openreview.net/pdf?id=MJIve1zgR_"><img class="layered-paper-big" style="height:150px"
+                src="cvpr22_assets/paper_thumb.png" /></a></td>
+        </div>
+        <div class="col-lg-7 col-lg-offset-1">
+          <h4> Unbiased Teacher v2: Semi-supervised Object Detection for Anchor-free and Anchor-based Detectors
+          </h4>
+          <h7>IEEE / CVF Computer Vision and Pattern Recognition Conference, 2022 <b>
+              <font color="#1387C4">(CVPR 2022)</font>
+            </b></h7><br>
+          <h7>Yen-Cheng Liu, Chih-Yao Ma, Zsolt Kira </h7>
+          <br> 
+        </div>
+      </div><!-- /row -->
+
+      <br><br>
+
+      <br>
+      <center>
+        <hr width="60%">
+      </center>
+
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Code</span><br><br>
+
+          <div class="col-lg-2 col-lg-offset-5">
+            <td><a href="https://github.com/facebookresearch/unbiased-teacher-v2"><img class="img-responsive" style="height:100px" src="common_assets/github_icon.png" /></a>
+            </td>
+            <br>        <br><br>
+
+          </div>
+
+        </center>
+
+        
+        <center>
+          <hr width="60%">
+        </center>
+
+  
+        <div class="row">
+          <center>
+            <span style="font-size:28px">Citation </span><br><br>
+          </center>
+
+            <pre>
+              @inproceedings{liu2022unbiased,
+                title={Unbiased Teacher v2: Semi-Supervised Object Detection for Anchor-Free and Anchor-Based Detectors},
+                author={Liu, Yen-Cheng and Ma, Chih-Yao and Kira, Zsolt},
+                booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+                year={2022}
+              }        
+            </pre>
+        </div><!-- /row -->
+
+
+
+        <center>
+          <hr width="60%">
+        </center>
+        
+        
+
+        <div class="row">
+          <center>
+            <span style="font-size:28px">Acknowledgements </span><br><br>
+            This project is done partially while Yen-Cheng Liu was interning at Meta. <br>
+            Yen-Cheng Liu and Zsolt Kira were partly supported by DARPA’s Learning with Less <br>
+             Labels(LwLL) program under agreement HR0011-18-S-0044,  
+            as part of their affiliation with Georgia Tech.
+          </center>
+        </div><!-- /row -->
+
+
+        <div class="row centered">
+
+          <div class="col-lg-4 col-lg-offset-4 centered">
+            <centered>
+              <script type="text/javascript" id="clustrmaps" 
+              src="//cdn.clustrmaps.com/map_v2.js?cl=080808&w=a&t=n&d=l5Ym7IXn0odyeKKtTwkKWIKHgOqCpUzantuL-6R8c0Y&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=808080"></script>
+            </centered>
+
+
+          </div>
+        </div>
+
+
+
+      </div> <!-- /container -->
+    </div><!-- /white -->
+
+
+
+
+
+
+
+
+
+    <!-- +++++ Footer Section +++++ -->
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+
+
+    <style type="text/css">
+      .layered-paper-big {
+        /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+          0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The top layer shadow */
+          5px 5px 0 0px #fff,
+          /* The second layer */
+          5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The second layer shadow */
+          10px 10px 0 0px #fff,
+          /* The third layer */
+          10px 10px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The third layer shadow */
+          15px 15px 0 0px #fff,
+          /* The fourth layer */
+          15px 15px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The fourth layer shadow */
+          20px 20px 0 0px #fff,
+          /* The fifth layer */
+          20px 20px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The fifth layer shadow */
+          25px 25px 0 0px #fff,
+          /* The fifth layer */
+          25px 25px 1px 1px rgba(0, 0, 0, 0.35);
+        /* The fifth layer shadow */
+        margin-left: 10px;
+        margin-right: 45px;
+      }
+
+
+      .layered-paper {
+        /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+          0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The top layer shadow */
+          5px 5px 0 0px #fff,
+          /* The second layer */
+          5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The second layer shadow */
+          10px 10px 0 0px #fff,
+          /* The third layer */
+          10px 10px 1px 1px rgba(0, 0, 0, 0.35);
+        /* The third layer shadow */
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-right: 30px;
+        margin-bottom: 5px;
+      }
+    </style>
+
+
+
+</body>
+
+</html>
