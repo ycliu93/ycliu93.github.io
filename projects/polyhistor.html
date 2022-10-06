@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Polyhistor: Parameter-Efficient Multi-Task Adaptation for Dense Vision Tasks</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
+
+  <!-- Custom styles for this template -->
+  <link href="../assets/css/main.css" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="../assets/js/hover.zoom.js"></script>
+  <script src="../assets/js/hover.zoom.conf.js"></script>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <!-- +++++ Title Section +++++ -->
+  <div id="white">
+    <div class="container">
+      <div class="row">
+        <center>
+
+          <div class="col-lg-12  centered">
+            <span style="font-size:40px">Polyhistor: Parameter-Efficient Multi-Task Adaptation for Dense Vision Tasks</span><br><br>
+          </div><!-- /col-lg-8 -->
+
+        </center>
+      </div><!-- /row -->
+
+
+      <!--       <div class="row">
+          <center>
+          <div class="col col-lg-2">
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://ycliu93.github.io/">Yen-Cheng Liu</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://www.linkedin.com/in/junjiao-tian-42b9758a/">Junjiao Tian*</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://sites.google.com/view/nathanglaser/">Nathaniel Glaser*</a></span>
+          </div>
+
+          <div class="col col-lg-2">
+                <span style="font-size:18px"><a href="https://www.cc.gatech.edu/~zk15/">Zsolt Kira</a></span>
+          </div>
+
+
+        </center>
+      </div><!-- /row -->
+
+
+
+      <div class="row">
+        <div class="col-lg-1 ">
+          <center>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+          <center>
+            <span style="font-size:16px"><a href="https://ycliu93.github.io/" target="_blank">Yen-Cheng
+                Liu<sup>1,2</sup></a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+          <center>
+            <span style="font-size:16px"><a href="https://chihyaoma.github.io/" target="_blank">Chih-Yao
+                Ma<sup>2</sup></a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+          <center>
+            <span style="font-size:16px"><a href="https://potatotian.github.io/"
+                target="_blank">Jujiao Tian <sup>1</sup></a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+
+        <div class="col-lg-2 ">
+          <center>
+            <span style="font-size:16px"><a href="https://research.facebook.com/people/he-zijian/" target="_blank">Zijian He<sup>2</sup></a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-2 ">
+          <center>
+            <span style="font-size:16px"><a href="https://www.cc.gatech.edu/~zk15/" target="_blank">Zsolt
+                Kira<sup>1</sup></a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-1 ">
+          <center>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+      </div><!-- /row -->
+
+
+
+      <br>
+
+
+      <div class="row">
+
+        <div class="col-lg-3 col-lg-offset-3">
+          <center>
+            <span style="font-size:20px"><a href="https://www.gatech.edu/" target="_blank"><sup>1</sup>Georgia
+                Tech</a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+        <div class="col-lg-3">
+          <center>
+            <span style="font-size:20px"><a href="https://research.facebook.com/" target="_blank"><sup>2</sup>Meta</a></span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+      </div><!-- /row -->
+
+      <br>
+      <div class="row">
+
+        <div class="col-lg-4 col-lg-offset-4 centered">
+          <center>
+            <span style="font-size:24px">NeurIPS 2022</span>
+          </center>
+        </div><!-- /col-lg-2 -->
+
+
+      </div><!-- /row -->
+
+      <br>
+      <br>
+
+
+      <!--       <center><hr width="80%" ></center>
+ -->
+
+      <!-- /Teaser image -->
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+          <img class="img-responsive" src="neurips22_assets/ills_fig.png" height="250" width="1000">
+          <p>
+            Fig: Illustration of (a) Hierarchical Vision Transformer and (b) Adapter. (c) When applying
+            adapters in a Hierarchical Vision Transformer, the number of parameters grows quadratically with
+            the respect to the block scale.
+           </p>
+        </div><!-- /col-lg-8 -->
+      </div><!-- /row -->
+
+      <br>
+      <br>
+
+      <br>
+
+      <!-- Motivation -->
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Motivation</span>
+          <center>
+            <hr width="95%">
+          </center>
+    
+          <div style="text-align:justify;font-size:25px">
+            <p>
+              As the state-of-the-art foundation models grow to billion or even trillion parameter models, <b>individually fine-tuning all parameters of the model wastes significant computational resources</b>. 
+              Further, for multi-task models, <b>both fine-tuning and storing separate models for multiple tasks become infeasible on devices with low computation resources.</b>
+              Therefore, we design a novel parameter-efficient method for adaptation to multiple dense vision tasks.
+            </div>
+        </center>
+      </div><!-- /row -->
+      <br><br>
+
+      <!-- Challenges -->
+
+
+      
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Our method</span>
+          <center>
+            <hr width="95%">
+          </center>
+          <div class="col-lg-8 col-lg-offset-2 centered">
+            <img class="img-responsive" src="neurips22_assets/method.png">
+            <p>
+              Fig: Illustration of our (a) Polyhistor and (b) Polyhistor-Lite. (a) We apply Decomposed HyperNetworks to reduce the number of training parameters in multi-task adaptation. 
+              We introduce Layer-wise Scaling Kernels to efficiently scale up Template Kernels for different scales of adapters. 
+              (b) By combining Decomposed HyperNetowrks and Layer-wise Scaling Kernels, our Polyhistor-Lite can efficiently address multi-task adaptation in dense vision tasks.          </div><!-- /col-lg-8 -->
+        </center>
+      </center>
+
+      </div><!-- /row -->
+
+      <div class="row">
+        <center>
+
+          <div style="text-align:justify;font-size:25px">
+            <p>
+              We propose Polyhistor-Lite, which consist of two main components, Decomposed Lite-HyperNetworks and Layer-wise Scaling Kernels. 
+              These two methods reduce the trainable parameters in two aspects respectively, including parameter reduction for hyper-networks in multi-tasking architecture and parameter reduction for adapters used in HVTs
+              For more details of the framework, please refer to our paper.
+            </div>
+        </center>
+      </div><!-- /row -->
+
+      <br><br>
+
+
+
+      <!-- <div class="row">
+        <center>
+          <span style="font-size:28px">1-min Video</span><br><br>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/r2uqtLumvlM" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </center>
+      </div> -->
+
+      <br><br>
+
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Paper </span>
+        </center>
+        <center>
+          <hr width="60%">
+        </center>
+    
+      </div><!-- /row -->
+      <br><br>
+
+      
+      <div class="row vertical-align">
+        <div class="col-lg-1 col-lg-offset-2">
+          <td><a href="../assets/file/ECCV22_OSSOD.pdf"><img class="layered-paper-big" style="height:150px"
+                src="neurips22_assets/paper_first_page.png" /></a></td>
+        </div>
+        <div class="col-lg-8 col-lg-offset-1">
+          <h4> Polyhistor: Parameter-Efficient Multi-Task Adaptation for Dense Vision Tasks
+
+          </h4>
+          <h7>Thirty-sixth Conference on Neural Information Processing Systems <b>
+              <font color="#1387C4">(NeurIPS 2022)</font>
+            </b></h7><br>
+          <h7>Y.-C. Liu, C.-Y. Ma, J. Tian, Z. He, Z. Kira </h7>
+          <br> 
+        </div>
+      </div><!-- /row -->
+
+      <br><br>
+
+      <br>
+      <center>
+        <hr width="60%">
+      </center>
+
+      <div class="row">
+        <center>
+          <span style="font-size:28px">Code (Coming soon)</span><br><br>
+
+          <div class="col-lg-2 col-lg-offset-5">
+            <td><a href="https://github.com/ycliu93/"><img class="img-responsive" style="height:100px" src="common_assets/github_icon.png" /></a>
+            </td>
+            <br>        <br><br>
+
+          </div>
+
+        </center>
+
+        
+        <center>
+          <hr width="60%">
+        </center>
+
+
+        <div class="row">
+          <center>
+            <span style="font-size:28px">Acknowledgements </span><br><br>
+            This project is done partially while Yen-Cheng Liu was interning at Meta. <br>
+            Yen-Cheng Liu and Zsolt Kira were partly supported by DARPA’s Learning with Less <br>
+             Labels(LwLL) program under agreement HR0011-18-S-0044,  
+            as part of their affiliation with Georgia Tech.
+          </center>
+        </div><!-- /row -->
+
+
+        <div class="row centered">
+
+          <div class="col-lg-4 col-lg-offset-4 centered">
+            <centered>
+              <script type="text/javascript" id="clustrmaps" 
+              src="//cdn.clustrmaps.com/map_v2.js?cl=080808&w=a&t=n&d=l5Ym7IXn0odyeKKtTwkKWIKHgOqCpUzantuL-6R8c0Y&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=808080"></script>
+            </centered>
+
+
+          </div>
+        </div>
+
+
+
+      </div> <!-- /container -->
+    </div><!-- /white -->
+
+
+
+
+
+
+
+
+
+    <!-- +++++ Footer Section +++++ -->
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+
+
+    <style type="text/css">
+      .layered-paper-big {
+        /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+          0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The top layer shadow */
+          5px 5px 0 0px #fff,
+          /* The second layer */
+          5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The second layer shadow */
+          10px 10px 0 0px #fff,
+          /* The third layer */
+          10px 10px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The third layer shadow */
+          15px 15px 0 0px #fff,
+          /* The fourth layer */
+          15px 15px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The fourth layer shadow */
+          20px 20px 0 0px #fff,
+          /* The fifth layer */
+          20px 20px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The fifth layer shadow */
+          25px 25px 0 0px #fff,
+          /* The fifth layer */
+          25px 25px 1px 1px rgba(0, 0, 0, 0.35);
+        /* The fifth layer shadow */
+        margin-left: 10px;
+        margin-right: 45px;
+      }
+
+
+      .layered-paper {
+        /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+          0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The top layer shadow */
+          5px 5px 0 0px #fff,
+          /* The second layer */
+          5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+          /* The second layer shadow */
+          10px 10px 0 0px #fff,
+          /* The third layer */
+          10px 10px 1px 1px rgba(0, 0, 0, 0.35);
+        /* The third layer shadow */
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-right: 30px;
+        margin-bottom: 5px;
+      }
+    </style>
+
+
+
+</body>
+
+</html>
